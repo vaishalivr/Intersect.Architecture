@@ -1,4 +1,4 @@
-const buildings = [
+export const buildings = [
   "Royal Ontario Museum",
   "Museum of Islamic Art",
   "Art Gallery of Ontario",
