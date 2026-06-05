@@ -2,4 +2,7 @@
   import Frame from "$lib/components/Frame.svelte";
 </script>
 
-<Frame></Frame>
+<Frame />
+
+<style>
+</style>
