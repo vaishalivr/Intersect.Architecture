@@ -1,8 +1,16 @@
 <script>
   import { onMount } from "svelte";
-  import { FRAME_WIDTH, FRAME_HEIGHT } from "$lib/constants.js";
+  import {
+    FRAME_WIDTH,
+    FRAME_HEIGHT,
+    ROTATIONS,
+    BUILDING_COLORS,
+  } from "$lib/constants.js";
   import { buildings } from "$lib/data.js";
+
   let randomBuildings = [];
+  //const rotations = [-90, -30, -45, -60, 30, 45, 60, 90, 120, 180];
+
   // Fisher-Yates shuffle to select random buildings
   function getRandomBuildings(array, count) {
     const shuffled = [...array];
@@ -13,8 +21,19 @@
     return shuffled.slice(0, count);
   }
 
+  function randomRotation() {
+    return ROTATIONS[Math.floor(Math.random() * ROTATIONS.length)];
+  }
+
+  function randomColor() {
+    return BUILDING_COLORS[Math.floor(Math.random() * BUILDING_COLORS.length)];
+  }
+
   onMount(() => {
-    randomBuildings = getRandomBuildings(buildings, 10);
+    randomBuildings = getRandomBuildings(buildings, 10).map((building) => ({
+      name: building,
+      color: randomColor(),
+    }));
   });
 </script>
 
@@ -24,7 +43,17 @@
     <div class="y-axis left"></div>
     <ul>
       {#each randomBuildings as building}
-        <li>{building}</li>
+        <li style:color={building.color}>
+          {#each Array.from(building.name) as letter}
+            <span class="letter">
+              <span
+                class="letter-inner"
+                style:--rotation={`${randomRotation()}deg`}
+                >{letter === " " ? "\u00A0" : letter}</span
+              >
+            </span>
+          {/each}
+        </li>
       {/each}
     </ul>
     <div class="y-axis-construction right"></div>
@@ -47,7 +76,6 @@
     margin: 0;
     padding: 1rem 2rem;
     text-align: center;
-    /* border: 1px solid red; */
     position: relative;
     text-transform: uppercase;
   }
@@ -62,6 +90,7 @@
     position: relative;
     display: inline-block;
   }
+
   .y-axis,
   .y-axis-construction {
     position: absolute;
@@ -70,12 +99,12 @@
   }
 
   .y-axis {
-    height: 100%;
+    height: calc(100% + 30px);
     border-left: 2px solid black;
   }
 
   .y-axis-construction {
-    height: calc(100% + 60px);
+    height: calc(100% + 70px);
     border-left: 0.3px solid grey;
   }
 
@@ -101,8 +130,27 @@
     width: calc(100% + 60px);
     border-top: 0.3px solid grey;
   }
+
   .x-axis {
     width: calc(100% + 20px);
     border-top: 2px solid black;
+  }
+
+  .letter {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    line-height: 1;
+    border: 1px solid red;
+  }
+
+  .letter-inner {
+    display: inline-block;
+    transition: transform 300ms ease;
+    pointer-events: none;
+    position: relative;
+  }
+  .letter:hover .letter-inner {
+    transform: scale(4.5) rotate(var(--rotation));
   }
 </style>
