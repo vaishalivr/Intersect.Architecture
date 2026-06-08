@@ -47,10 +47,13 @@
           {#each Array.from(building.name) as letter}
             <span class="letter">
               <span
-                class="letter-inner"
+                class="letter-rotator"
                 style:--rotation={`${randomRotation()}deg`}
-                >{letter === " " ? "\u00A0" : letter}</span
               >
+                <span class="letter-inner">
+                  {letter === " " ? "\u00A0" : letter}
+                </span>
+              </span>
             </span>
           {/each}
         </li>
@@ -144,13 +147,49 @@
     border: 1px solid red;
   }
 
-  .letter-inner {
+  .letter-rotator {
     display: inline-block;
-    transition: transform 300ms ease;
+    transition: transform 300ms ease 900ms;
     pointer-events: none;
     position: relative;
   }
+  .letter-inner {
+    display: inline-block;
+    opacity: 1;
+    transition:
+      transform 300ms ease 900ms,
+      opacity 300ms ease 900ms;
+  }
+  .letter:hover .letter-rotator {
+    transition-delay: 0ms;
+    transform: rotate(var(--rotation));
+  }
   .letter:hover .letter-inner {
-    transform: scale(4.5) rotate(var(--rotation));
+    transition-delay: 0ms;
+    transform: scale(4.5);
+    opacity: 0.6;
+  }
+  .letter-rotator::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1px;
+    height: 6em;
+    background: repeating-linear-gradient(
+      to bottom,
+      #767b91 0 0.75em,
+      transparent 0.75em 1em,
+      #767b91 1em 1.12em,
+      transparent 1.12em 1.37em
+    );
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0ms linear 1200ms;
+  }
+  .letter:hover .letter-rotator::after {
+    opacity: 1;
+    transition-delay: 0ms;
   }
 </style>
