@@ -6,19 +6,27 @@
     ROTATIONS,
     BUILDING_COLORS,
   } from "$lib/constants.js";
-  import { buildings } from "$lib/data.js";
+  import { buildings, continents } from "$lib/data.js";
 
   let randomBuildings = [];
-  //const rotations = [-90, -30, -45, -60, 30, 45, 60, 90, 120, 180];
 
-  // Fisher-Yates shuffle to select random buildings
+  function getBuildingInfo(building) {
+    return {
+      name: building.name,
+      location: building.location,
+    };
+  }
+
+  // Fisher-Yates shuffle to select random building names
   function getRandomBuildings(array, count) {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return shuffled.slice(0, count);
+    return shuffled
+      .slice(0, count)
+      .map((building) => getBuildingInfo(building));
   }
 
   function randomRotation() {
@@ -31,7 +39,7 @@
 
   onMount(() => {
     randomBuildings = getRandomBuildings(buildings, 10).map((building) => ({
-      name: building,
+      ...building,
       color: randomColor(),
     }));
   });
@@ -57,6 +65,7 @@
             </span>
           {/each}
         </li>
+        <span class="location">{building.location}</span>
       {/each}
     </ul>
     <div class="y-axis-construction right"></div>
@@ -153,6 +162,7 @@
     pointer-events: none;
     position: relative;
   }
+
   .letter-inner {
     display: inline-block;
     opacity: 1;
@@ -160,15 +170,18 @@
       transform 300ms ease 900ms,
       opacity 300ms ease 900ms;
   }
+
   .letter:hover .letter-rotator {
     transition-delay: 0ms;
     transform: rotate(var(--rotation));
   }
+
   .letter:hover .letter-inner {
     transition-delay: 0ms;
     transform: scale(4.5);
     opacity: 0.6;
   }
+
   .letter-rotator::after {
     content: "";
     position: absolute;
@@ -188,8 +201,16 @@
     opacity: 0;
     transition: opacity 0ms linear 1200ms;
   }
+
   .letter:hover .letter-rotator::after {
     opacity: 1;
     transition-delay: 0ms;
+  }
+
+  .location {
+    display: block;
+    font-size: 0.6rem;
+    color: rgba(0, 0, 0, 0.5);
+    margin-top: -1rem;
   }
 </style>
