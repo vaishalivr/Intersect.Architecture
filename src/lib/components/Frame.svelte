@@ -144,7 +144,7 @@
     cursor: pointer;
     position: relative;
     line-height: 1;
-    border: 1px solid red;
+    /* border: 1px solid red; */
   }
 
   .letter-rotator {
