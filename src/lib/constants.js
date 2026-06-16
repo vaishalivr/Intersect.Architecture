@@ -7,7 +7,6 @@ export const ROTATIONS = [
 export const BUILDING_COLORS = [
   "#F42525", // red
   "#F48C25", // orange
-  "#F4F425", // yellow
   "#80F20D", // yellow-green
   "#0BDA0B", // green
   "#0BDA73", // blue-green

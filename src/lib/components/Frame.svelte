@@ -6,7 +6,13 @@
     ROTATIONS,
     BUILDING_COLORS,
   } from "$lib/constants.js";
-  import { buildings, continents } from "$lib/data.js";
+  import {
+    buildings,
+    placeNouns,
+    conceptNouns,
+    properNames,
+    qualityWords,
+  } from "$lib/data.js";
 
   let randomBuildings = [];
 
@@ -33,47 +39,98 @@
     return ROTATIONS[Math.floor(Math.random() * ROTATIONS.length)];
   }
 
-  function randomColor() {
-    return BUILDING_COLORS[Math.floor(Math.random() * BUILDING_COLORS.length)];
+  function buildWordTokens(text) {
+    return text.toLowerCase().match(/\p{L}+/gu) ?? [];
+  }
+
+  function containsFullWord(name, noun) {
+    const nameTokens = buildWordTokens(name);
+    const nounTokens = buildWordTokens(noun);
+    if (nounTokens.length === 0) return false;
+
+    if (nounTokens.length === 1) {
+      return nameTokens.includes(nounTokens[0]);
+    }
+
+    for (let i = 0; i <= nameTokens.length - nounTokens.length; i += 1) {
+      let match = true;
+      for (let j = 0; j < nounTokens.length; j += 1) {
+        if (nameTokens[i + j] !== nounTokens[j]) {
+          match = false;
+          break;
+        }
+      }
+      if (match) return true;
+    }
+
+    return false;
+  }
+
+  function findMatchingNouns(nounList) {
+    return nounList.filter((noun) =>
+      randomBuildings.some((b) => containsFullWord(b.name, noun)),
+    );
+  }
+
+  function getFoundPlaceNouns() {
+    return findMatchingNouns(placeNouns);
+  }
+
+  function getFoundConceptNouns() {
+    return findMatchingNouns(conceptNouns);
+  }
+
+  function getFoundProperNames() {
+    return findMatchingNouns(properNames);
+  }
+
+  function getFoundQualityWords() {
+    return findMatchingNouns(qualityWords);
   }
 
   onMount(() => {
+    const chosenColor =
+      BUILDING_COLORS[Math.floor(Math.random() * BUILDING_COLORS.length)];
     randomBuildings = getRandomBuildings(buildings, 10).map((building) => ({
       ...building,
-      color: randomColor(),
+      color: chosenColor,
     }));
+    console.log("randomBuildings", randomBuildings);
+
+    const foundQualityWords = getFoundQualityWords();
+    console.log("foundQualityWords", foundQualityWords);
+
+    const foundProperNames = getFoundProperNames();
+    console.log("foundProperNames", foundProperNames);
+
+    const foundConceptNouns = getFoundConceptNouns();
+    console.log("foundConceptNouns", foundConceptNouns);
+
+    const foundPlaceNouns = getFoundPlaceNouns();
+    console.log("foundPlaceNouns", foundPlaceNouns);
   });
 </script>
 
 <div class="frame" style="width: {FRAME_WIDTH}px; height: {FRAME_HEIGHT}px;">
-  <div class="axis">
-    <div class="y-axis-construction left"></div>
-    <div class="y-axis left"></div>
-    <ul>
-      {#each randomBuildings as building}
-        <li style:color={building.color}>
-          {#each Array.from(building.name) as letter}
-            <span class="letter">
-              <span
-                class="letter-rotator"
-                style:--rotation={`${randomRotation()}deg`}
-              >
-                <span class="letter-inner">
-                  {letter === " " ? "\u00A0" : letter}
-                </span>
+  <ul>
+    {#each randomBuildings as building}
+      <li style:color={building.color}>
+        {#each Array.from(building.name) as letter}
+          <span class="letter">
+            <span
+              class="letter-rotator"
+              style:--rotation={`${randomRotation()}deg`}
+            >
+              <span class="letter-inner">
+                {letter === " " ? "\u00A0" : letter}
               </span>
             </span>
-          {/each}
-        </li>
-        <span class="location">{building.location}</span>
-      {/each}
-    </ul>
-    <div class="y-axis-construction right"></div>
-    <div class="y-axis right"></div>
-
-    <div class="x-axis-construction"></div>
-    <div class="x-axis"></div>
-  </div>
+          </span>
+        {/each}
+      </li>
+      <span class="location">{building.location}</span>
+    {/each}
+  </ul>
 </div>
 
 <style>
@@ -96,56 +153,6 @@
     line-height: 3rem;
     list-style-type: none;
     color: rgba(0, 0, 0, 0.7);
-  }
-
-  .axis {
-    position: relative;
-    display: inline-block;
-  }
-
-  .y-axis,
-  .y-axis-construction {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .y-axis {
-    height: calc(100% + 30px);
-    border-left: 2px solid black;
-  }
-
-  .y-axis-construction {
-    height: calc(100% + 70px);
-    border-left: 0.3px solid grey;
-  }
-
-  .y-axis-construction.left,
-  .y-axis.left {
-    left: 0px;
-  }
-
-  .y-axis-construction.right,
-  .y-axis.right {
-    right: 0px;
-  }
-
-  .x-axis,
-  .x-axis-construction {
-    position: absolute;
-    left: 50%;
-    top: 100%;
-    transform: translateX(-50%);
-  }
-
-  .x-axis-construction {
-    width: calc(100% + 60px);
-    border-top: 0.3px solid grey;
-  }
-
-  .x-axis {
-    width: calc(100% + 20px);
-    border-top: 2px solid black;
   }
 
   .letter {
