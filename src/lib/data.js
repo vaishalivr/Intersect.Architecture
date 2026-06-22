@@ -41,7 +41,9 @@ export const buildings = [
   },
   {
     name: "Great Stupa at Amaravati",
-    location: "India",
+    location: "Amaravati, India",
+    description:
+      "Stupa [stoo-puh] An ancient Buddhist monument known for its richly carved stone reliefs.",
   },
   {
     name: "Library of Celsus",
@@ -342,6 +344,8 @@ export const buildings = [
   {
     name: "Schröder House",
     location: "Utrecht, Netherlands",
+    description:
+      "Schröder House is a 1920s Dutch residence known for its flexible open plan, sliding partitions, and bold De Stijl design of intersecting planes and primary colors.",
   },
   {
     name: "Villa Savoye",
@@ -360,7 +364,7 @@ export const buildings = [
     location: "New York, United States",
   },
   {
-    name: "Fallingwater",
+    name: "Falling Water",
     location: "Pennsylvania, United States",
   },
   {
@@ -408,7 +412,7 @@ export const buildings = [
     location: "Northern China",
   },
   {
-    name: "Beijing National Stadium — Bird’s Nest",
+    name: "Beijing National Stadium",
     location: "Beijing, China",
   },
   {
@@ -552,7 +556,7 @@ export const conceptNouns = [
   "world",
 ];
 
-export const properNames = [
+export const properPlaceNames = [
   "Abu Dhabi",
   "Aachen",
   "AEG",
@@ -574,7 +578,7 @@ export const properNames = [
   "Brandenburg",
   "Brasília",
   "Brihadisvara",
-  "Burj Khalifa",
+  "Burj",
   "Carrée",
   "Caserta",
   "Celsus",
@@ -635,16 +639,18 @@ export const properNames = [
   "Schröder",
   "Shah",
   "Sydney",
-  "Sagrada Família",
+  "Sagrada",
+  "Família",
   "Sainte-Geneviève",
   "Süleymaniye",
-  "Sultan Ahmed",
+  "Sultan",
   "Taj Mahal",
   "Tikal",
   "Ur",
   "Umayyad",
   "United States",
   "Vanna Venturi",
+  "Venturi",
   "Versailles",
   "Vittorio Emanuele II",
   "Volvo",
