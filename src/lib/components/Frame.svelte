@@ -10,16 +10,18 @@
     buildings,
     placeNouns,
     conceptNouns,
-    properNames,
+    properPlaceNames,
     qualityWords,
   } from "$lib/data.js";
 
   let randomBuildings = [];
+  let generatedName = "";
 
   function getBuildingInfo(building) {
     return {
       name: building.name,
       location: building.location,
+      description: building.description || "",
     };
   }
 
@@ -66,32 +68,106 @@
     return false;
   }
 
-  function findMatchingNouns(nounList) {
-    return nounList.filter((noun) =>
-      randomBuildings.some((b) => containsFullWord(b.name, noun)),
-    );
+  function findMatchingNounObjects(nounList) {
+    const matches = [];
+
+    randomBuildings.forEach((building) => {
+      nounList.forEach((noun) => {
+        if (containsFullWord(building.name, noun)) {
+          matches.push({ noun, source: building.name });
+        }
+      });
+    });
+
+    return matches;
   }
 
   function getFoundPlaceNouns() {
-    return findMatchingNouns(placeNouns);
+    return findMatchingNounObjects(placeNouns);
   }
 
   function getFoundConceptNouns() {
-    return findMatchingNouns(conceptNouns);
+    return findMatchingNounObjects(conceptNouns);
   }
 
   function getFoundProperNames() {
-    return findMatchingNouns(properNames);
+    return findMatchingNounObjects(properPlaceNames);
   }
 
   function getFoundQualityWords() {
-    return findMatchingNouns(qualityWords);
+    return findMatchingNounObjects(qualityWords);
+  }
+
+  function getRandomElement(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function getRandomCandidateExcluding(candidates, excludedSources) {
+    const filtered = candidates.filter(
+      (candidate) => !excludedSources.includes(candidate.source),
+    );
+    return filtered.length > 0 ? getRandomElement(filtered) : null;
+  }
+
+  function buildNameFromPattern(pattern, founds) {
+    const chosen = [];
+    const usedSources = new Set();
+
+    for (const category of pattern) {
+      const nextCandidate = getRandomCandidateExcluding(
+        founds[category],
+        Array.from(usedSources),
+      );
+      if (!nextCandidate) return null;
+
+      chosen.push(nextCandidate.noun);
+      usedSources.add(nextCandidate.source);
+    }
+
+    return chosen.join(" ");
+  }
+
+  function generateName(foundQuality, foundConcept, foundPlace, foundProper) {
+    const qualityCount = foundQuality.length;
+    const properCount = foundProper.length;
+    const total = qualityCount + properCount;
+    const qualityProbability = total > 0 ? qualityCount / total : 0;
+    const useQualityPattern = Math.random() < qualityProbability;
+    const founds = {
+      quality: foundQuality,
+      concept: foundConcept,
+      place: foundPlace,
+      proper: foundProper,
+    };
+
+    if (useQualityPattern) {
+      return (
+        buildNameFromPattern(["quality", "concept", "place"], founds) ||
+        buildNameFromPattern(["quality", "place"], founds) ||
+        buildNameFromPattern(["quality", "proper"], founds) ||
+        buildNameFromPattern(["quality", "concept"], founds)
+      );
+    }
+
+    return (
+      buildNameFromPattern(["proper", "concept", "place"], founds) ||
+      buildNameFromPattern(["proper", "place"], founds) ||
+      buildNameFromPattern(["quality", "proper"], founds) ||
+      buildNameFromPattern(["quality", "place"], founds) ||
+      buildNameFromPattern(["concept", "place"], founds) ||
+      buildNameFromPattern(["proper", "place"], founds) ||
+      buildNameFromPattern(["quality", "proper"], founds) ||
+      buildNameFromPattern(["quality"], founds) ||
+      buildNameFromPattern(["proper"], founds) ||
+      buildNameFromPattern(["place"], founds) ||
+      buildNameFromPattern(["concept"], founds)
+    );
   }
 
   onMount(() => {
     const chosenColor =
       BUILDING_COLORS[Math.floor(Math.random() * BUILDING_COLORS.length)];
-    randomBuildings = getRandomBuildings(buildings, 10).map((building) => ({
+    randomBuildings = getRandomBuildings(buildings, 5).map((building) => ({
       ...building,
       color: chosenColor,
     }));
@@ -108,6 +184,14 @@
 
     const foundPlaceNouns = getFoundPlaceNouns();
     console.log("foundPlaceNouns", foundPlaceNouns);
+
+    generatedName = generateName(
+      foundQualityWords,
+      foundConceptNouns,
+      foundPlaceNouns,
+      foundProperNames,
+    );
+    console.log("generatedName", generatedName);
   });
 </script>
 
@@ -129,7 +213,11 @@
         {/each}
       </li>
       <span class="location">{building.location}</span>
+      <span class="description">{building.description}</span>
     {/each}
+    {#if generatedName}
+      <div class="generated-name">{generatedName}</div>
+    {/if}
   </ul>
 </div>
 
@@ -214,10 +302,26 @@
     transition-delay: 0ms;
   }
 
-  .location {
+  .generated-name {
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+  }
+
+  .location,
+  .description {
     display: block;
     font-size: 0.6rem;
     color: rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+  }
+
+  .location {
     margin-top: -1rem;
+  }
+
+  .description {
+    margin-top: 0.1rem;
   }
 </style>
