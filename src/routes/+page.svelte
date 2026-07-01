@@ -1,8 +1,10 @@
 <script>
   import Frame from "$lib/components/Frame.svelte";
+  import SixFrames from "$lib/components/6Frames.svelte";
 </script>
 
-<Frame />
+<!-- <Frames /> -->
+<SixFrames />
 
 <style>
 </style>

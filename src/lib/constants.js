@@ -4,6 +4,8 @@ export const BUILDING_COUNT = 10;
 export const ROTATIONS = [
   -90, -30, -45, -60, 30, 45, 60, 90, 120, 180, 90, -90,
 ];
+export const sixFramesTotalWidth = "min(90vw, 1000px)";
+
 export const BUILDING_COLORS = [
   "#F42525", // red
   "#F48C25", // orange
