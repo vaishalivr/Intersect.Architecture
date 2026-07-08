@@ -197,9 +197,11 @@
 <style>
   .main-rect {
     width: var(--main-width);
-    height: clamp(200px, 75vh, 750px);
+    min-height: clamp(200px, 75vh, 750px);
+    height: auto;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: max-content;
     gap: 1.5rem;
     padding: 1.5rem;
     border: 0.01px solid black;
@@ -214,6 +216,9 @@
   }
 
   .cell-generated-name {
+    font-family: "Adobe Handwriting Ernie", "Segoe Script", "Bradley Hand",
+      cursive;
+    font-size: 2.4rem;
     font-weight: bold;
     text-align: center;
     margin: 1rem;
