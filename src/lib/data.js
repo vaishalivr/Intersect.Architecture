@@ -1,488 +1,586 @@
-import { deserialize } from "$app/forms";
-
 export const buildings = [
   {
     name: "Göbekli Tepe",
-    description: "Türkiye",
+    description:
+      "An ancient Türkiye ritual site where stone circles gather mystery and worship.",
   },
   {
     name: "Great Pyramid of Giza",
-    description: "Egypt",
+    description:
+      "Egypt’s monumental tomb turns memory, power, and geometry into one.",
   },
   {
     name: "Ziggurat of Ur",
-    description: "Iraq",
+    description:
+      "A stepped temple tower in Iraq, built to lift worship upward.",
   },
   {
     name: "Karnak Temple Complex",
-    description: "Egypt",
+    description:
+      "An Egyptian temple world shaped by worship, scale, and sacred time.",
   },
   {
     name: "Palace of Knossos",
-    description: "Crete, Greece",
+    description:
+      "A Cretan palace where rule, ritual, and myth seem to overlap.",
   },
   {
     name: "Treasury of Atreus",
-    description: "Mycenae, Greece",
+    description: "A Mycenaean tomb in Greece with a quiet, powerful memory.",
   },
   {
     name: "Sanchi Stupa",
-    description: "India",
+    description:
+      "An Indian Buddhist dome that holds devotion, pilgrimage, and stillness.",
   },
   {
     name: "Parthenon",
-    description: "Athens, Greece",
+    description:
+      "An Athenian temple where worship, proportion, and civic pride meet.",
   },
   {
     name: "Apadana at Persepolis",
-    description: "Iran",
+    description:
+      "A royal audience hall in Iran, made for ceremony and arrival.",
   },
   {
     name: "Temple of Hephaestus",
-    description: "Athens, Greece",
+    description:
+      "An Athenian temple preserving ancient worship with remarkable calm and clarity.",
   },
   {
     name: "Great Stupa at Amaravati",
-    description: "Amaravati, India",
-    description: "Ancient Buddhist dome monument at Amaravati.",
+    description:
+      "An Indian Buddhist monument carrying worship, learning, and carved memory.",
   },
   {
     name: "Library of Celsus",
-    description: "Ephesus, Türkiye",
+    description:
+      "A Roman library in Türkiye where knowledge was given a grand face.",
   },
   {
     name: "Pantheon",
-    description: "Rome, Italy",
+    description:
+      "A Roman temple where light, worship, and the heavens enter together.",
   },
   {
     name: "Colosseum",
-    description: "Rome, Italy",
+    description:
+      "Rome’s giant arena turns entertainment, crowd, and empire into architecture.",
   },
   {
     name: "Maison Carrée",
-    description: "Nîmes, France",
+    description: "Called the square house, but really a Roman temple in Nîmes.",
   },
   {
     name: "Diocletian’s Palace",
-    description: "Split, Croatia",
+    description:
+      "A Croatian palace that became a city of residence and defense.",
   },
   {
     name: "Great Bath of the Roman Baths",
-    description: "Bath, United Kingdom",
+    description:
+      "A Roman bathing space in Bath where water became social life.",
   },
   {
     name: "Temple of the Inscriptions",
-    description: "Palenque, Mexico",
+    description:
+      "A Maya temple in Mexico carrying worship, memory, and royal presence.",
   },
   {
     name: "Pyramid of the Sun",
-    description: "Teotihuacan, Mexico",
+    description:
+      "A Mexican pyramid that turns sunlight, scale, and worship upward.",
   },
   {
     name: "Tikal Temple I",
-    description: "Guatemala",
+    description:
+      "A Guatemalan Maya temple rising like memory above the forest.",
   },
   {
     name: "Hagia Sophia",
-    description: "Istanbul, Türkiye",
+    description:
+      "Istanbul’s layered landmark, shaped by worship, memory, and sacred use.",
   },
   {
     name: "Basilica of San Vitale",
-    description: "Ravenna, Italy",
+    description:
+      "A Ravenna church where worship glows through mosaics and sacred space.",
   },
   {
-    name: "Hōryū-ji",
-    description: "Nara Prefecture, Japan",
+    name: "Hōryūji",
+    description:
+      "A Japanese Buddhist temple carrying worship, wood, and deep time.",
   },
   {
     name: "Dome of the Rock",
-    description: "Jerusalem",
+    description:
+      "A Jerusalem shrine where sacred geometry gathers devotion and presence.",
   },
   {
     name: "Umayyad Mosque",
-    description: "Damascus, Syria",
+    description:
+      "A Damascus mosque where worship, history, and public life continue.",
   },
   {
     name: "Borobudur",
-    description: "Java, Indonesia",
+    description:
+      "A Javanese Buddhist monument that turns pilgrimage into an upward journey.",
   },
   {
     name: "Prambanan",
-    description: "Java, Indonesia",
+    description:
+      "A Javanese Hindu temple complex rising with worship and carved myth.",
   },
   {
     name: "Great Mosque of Samarra",
-    description: "Iraq",
+    description:
+      "An Iraqi mosque remembered through worship, scale, and its spiraling tower.",
   },
   {
     name: "Aachen Cathedral",
-    description: "Germany",
+    description:
+      "A German cathedral where worship and royal memory share one space.",
   },
   {
     name: "Jokhang Temple",
-    description: "Lhasa, Tibet",
+    description:
+      "A Lhasa temple alive with pilgrimage, devotion, and sacred movement.",
   },
   {
     name: "Brihadisvara Temple",
-    description: "Thanjavur, India",
+    description:
+      "A Thanjavur temple where stone, worship, and Chola power meet.",
   },
   {
     name: "Angkor Wat",
-    description: "Cambodia",
+    description:
+      "A Cambodian temple world where devotion, memory, and landscape become vast.",
   },
   {
     name: "Durham Cathedral",
-    description: "United Kingdom",
+    description:
+      "A United Kingdom cathedral with a strong, fortress-like sacred presence.",
   },
   {
     name: "Chartres Cathedral",
-    description: "France",
+    description:
+      "A French Gothic cathedral where worship is lifted into colored light.",
   },
   {
     name: "Hoysaleswara Temple",
-    description: "Halebidu, India",
+    description:
+      "A Halebidu temple in India carved with worship and patient detail.",
   },
   {
     name: "Church of St George, Lalibela",
-    description: "Ethiopia",
+    description:
+      "An Ethiopian rock-hewn church shaped from earth into devotion.",
   },
   {
     name: "Qutb Minar",
-    description: "Delhi, India",
+    description: "A Delhi tower that draws the eye upward toward worship.",
   },
   {
     name: "Konark Sun Temple",
-    description: "Odisha, India",
+    description:
+      "An Odisha temple where architecture imagines the sun in motion.",
   },
   {
-    name: "Sainte-Chapelle",
-    description: "Paris, France",
+    name: "Sainte Chapelle",
+    description:
+      "A Paris chapel where worship seems suspended inside colored glass.",
   },
   {
     name: "Great Enclosure at Great Zimbabwe",
-    description: "Zimbabwe",
+    description:
+      "A Zimbabwe stone enclosure with the presence of rule and gathering.",
   },
   {
     name: "Alhambra",
-    description: "Granada, Spain",
+    description:
+      "A Granada palace-fortress where power, gardens, and ornament quietly meet.",
   },
   {
     name: "Forbidden City",
     description:
-      "Imperial palace complex in Beijing, China, built for rulers to live, govern, and serve",
+      "A Beijing palace-city with imperial authority, ceremony, and guarded power.",
   },
   {
-    name: "Kinkaku-ji",
-    description: "Kyoto, Japan",
+    name: "Kinkakuji",
+    description:
+      "A Kyoto temple-residence that reflects beauty, stillness, and golden memory.",
   },
   {
     name: "Machu Picchu",
     description:
-      "1450 Inca site built for leadership, rule and worship in Cusco region of Peru",
+      "A Peruvian mountain site where residence, worship, and landscape merge.",
   },
   {
     name: "Florence Cathedral",
-    description: "Italy",
+    description:
+      "A Florence cathedral whose dome turns worship into a city landmark.",
   },
   {
     name: "Doge’s Palace",
-    description: "Venice, Italy",
+    description:
+      "A Venetian palace where rule, ceremony, and civic power meet water.",
   },
   {
     name: "Elmina Castle",
-    description: "Ghana",
+    description:
+      "A Ghanaian coastal castle holding trade, defense, and difficult memory.",
   },
   {
     name: "Château de Chambord",
-    description: "France",
+    description:
+      "A French grand residence where royalty, landscape, and display unfold.",
   },
   {
     name: "St Peter’s Basilica",
-    description: "Vatican City",
+    description:
+      "A Vatican basilica where worship becomes monumental, public, and enduring.",
   },
   {
     name: "Humayun’s Tomb",
-    description: "Delhi, India",
+    description: "A Delhi tomb where memory, garden, and Mughal power align.",
   },
   {
     name: "Süleymaniye Mosque",
-    description: "Istanbul, Türkiye",
+    description:
+      "An Istanbul mosque complex balancing worship, gathering, and imperial presence.",
   },
   {
     name: "St Basil’s Cathedral",
-    description: "Moscow, Russia",
+    description:
+      "A Moscow cathedral with a vivid, almost storybook sacred personality.",
   },
   {
     name: "Temple of Heaven",
-    description: "Beijing, China",
+    description:
+      "A Beijing ritual complex where worship and governance meet the sky.",
   },
   {
     name: "Himeji Castle",
-    description: "Japan",
+    description:
+      "A Japanese castle with elegance, defense, and layered white strength.",
   },
   {
     name: "Sultan Ahmed Mosque",
-    description: "Istanbul, Türkiye",
+    description:
+      "An Istanbul mosque where worship and skyline become one presence.",
   },
   {
     name: "Shah Mosque",
-    description: "Isfahan, Iran",
+    description:
+      "An Isfahan mosque where worship is carried through tile, color, and scale.",
   },
   {
     name: "Taj Mahal",
-    description: "Agra, India",
+    description:
+      "Agra’s marble memory of love, honor, and imperial craftsmanship.",
   },
   {
     name: "Potala Palace",
-    description: "Lhasa, Tibet",
+    description:
+      "A Lhasa palace rising with rule, worship, and mountain authority.",
   },
   {
     name: "Palace of Versailles",
-    description: "France",
+    description:
+      "A French royal palace where power performs through rooms and gardens.",
   },
   {
     name: "St Paul’s Cathedral",
-    description: "London, United Kingdom",
+    description:
+      "A London cathedral where worship and resilience shape the skyline.",
   },
   {
     name: "Royal Palace of Caserta",
-    description: "Italy",
+    description:
+      "An Italian palace where royal residence stretches into gardened ceremony.",
   },
   {
     name: "Panthéon",
-    description: "Paris, France",
+    description:
+      "A Paris monument that turns worship, memory, and nation into stone.",
   },
   {
     name: "Royal Crescent",
-    description: "Bath, United Kingdom",
+    description:
+      "A Bath residential crescent where everyday living becomes elegant urban form.",
   },
   {
     name: "Monticello",
-    description: "Virginia, United States",
+    description:
+      "A Virginia residence where architecture, landscape, and history sit uneasily together.",
   },
   {
     name: "United States Capitol",
-    description: "Washington, D.C.",
+    description:
+      "A Washington civic building where governance is staged in monumental form.",
   },
   {
     name: "Brandenburg Gate",
-    description: "Berlin, Germany",
+    description:
+      "A Berlin gate carrying civic memory, gathering, and national symbolism.",
   },
   {
     name: "British Museum",
-    description: "London, United Kingdom",
+    description:
+      "A London museum where collections turn the world into public learning.",
   },
   {
     name: "Palace of Westminster",
-    description: "London, United Kingdom",
+    description:
+      "A London parliament building where governance becomes Gothic civic theatre.",
   },
   {
-    name: "Bibliothèque Sainte-Geneviève",
-    description: "Paris, France",
+    name: "Bibliothèque Sainte Geneviève",
+    description:
+      "A Paris library where public learning is given a graceful structure.",
   },
   {
     name: "Crystal Palace",
-    description: "London, United Kingdom",
+    description:
+      "A London exhibition hall where glass, industry, and spectacle once met.",
   },
   {
     name: "Red House",
-    description: "Bexleyheath, United Kingdom",
+    description:
+      "A Bexleyheath home where craft, color, and everyday life meet.",
   },
   {
     name: "Galleria Vittorio Emanuele II",
-    description: "Milan, Italy",
+    description:
+      "A Milan arcade where shopping, gathering, and city life become theatrical.",
   },
   {
     name: "Chhatrapati Shivaji Maharaj Terminus",
-    description: "Mumbai, India",
+    description:
+      "A Mumbai station where travel, work, and heritage constantly move.",
   },
   {
     name: "Eiffel Tower",
     description:
-      "Landmark tower in Paris, France built to gather and entertain visitors",
+      "A Paris tower that turns structure, spectacle, and city-view into one.",
   },
   {
     name: "Natural History Museum",
-    description: "London, United Kingdom",
+    description:
+      "A London museum where nature, science, and wonder become public.",
   },
   {
     name: "Hungarian Parliament Building",
-    description: "Budapest, Hungary",
+    description:
+      "A Budapest parliament where civic power meets riverside grandeur.",
   },
   {
     name: "Wainwright Building",
-    description: "St Louis, United States",
+    description:
+      "A St Louis skyscraper that helped commerce learn to stand tall.",
   },
   {
     name: "Flatiron Building",
-    description: "New York, United States",
+    description:
+      "A New York landmark where a sharp corner becomes urban personality.",
   },
   {
     name: "Casa Batlló",
-    description: "Barcelona, Spain",
+    description:
+      "A Barcelona residence where Gaudí turns living into dreamlike motion.",
   },
   {
     name: "Glasgow School of Art, Mackintosh Building",
-    description: "Glasgow, United Kingdom",
+    description:
+      "A Glasgow art school where learning, craft, and modern design meet.",
   },
   {
     name: "AEG Turbine Factory",
-    description: "Berlin, Germany",
+    description:
+      "A Berlin factory where industrial work begins to look modern.",
   },
   {
     name: "Robie House",
-    description: "Chicago, United States",
+    description:
+      "A Chicago home stretched low, horizontal, and calm across the land.",
   },
   {
     name: "Fagus Factory",
-    description: "Alfeld, Germany",
+    description:
+      "An Alfeld factory where glass and industry announce modern architecture.",
   },
   {
     name: "Einstein Tower",
-    description: "Potsdam, Germany",
+    description:
+      "A Potsdam observatory where science takes on a sculptural personality.",
   },
   {
     name: "Bauhaus Building",
-    description: "Dessau, Germany",
+    description:
+      "A Dessau school where design, learning, and modern life intersect.",
   },
   {
     name: "Schröder House",
-    description: "Utrecht, Netherlands",
-    description:
-      "Schröder House is a 1920s Dutch residence known for its flexible open plan, sliding partitions, and bold De Stijl design of intersecting planes and primary colors.",
+    description: "A Utrecht house where walls, color, and space learn to move.",
   },
   {
     name: "Villa Savoye",
-    description: "Poissy, France",
+    description:
+      "A Poissy villa where modern living becomes lifted, open, and precise.",
   },
   {
     name: "Barcelona Pavilion",
-    description: "Barcelona, Spain",
+    description:
+      "A Barcelona pavilion where space, material, and pause become the event.",
   },
   {
     name: "Chrysler Building",
-    description: "New York, United States",
+    description:
+      "A New York skyscraper wearing speed, shine, and Art Deco confidence.",
   },
   {
     name: "Empire State Building",
-    description: "New York, United States",
+    description:
+      "A New York skyscraper that turns height into civic imagination.",
   },
   {
     name: "Falling Water",
-    description: "Pennsylvania, United States",
-    description: "Private weekend home that appears to float over a waterfall",
+    description:
+      "A Pennsylvania house where home, rock, forest, and waterfall interlock.",
   },
   {
     name: "Paimio Sanatorium",
-    description: "Finland",
+    description:
+      "A Finnish sanatorium where architecture was designed to help bodies recover.",
   },
   {
     name: "Secretariat Building",
-    description: "Chandigarh, India",
+    description:
+      "A Chandigarh government building where civic work becomes monumental rhythm.",
   },
   {
     name: "National Assembly Building",
-    description: "Dhaka, Bangladesh",
+    description:
+      "A Dhaka parliament where governance is shaped through light and geometry.",
   },
   {
     name: "Brasília Cathedral",
-    description: "Brazil",
+    description:
+      "A Brasília cathedral where worship rises through dramatic modern structure.",
   },
   {
     name: "Sydney Opera House",
-    description: "Sydney, Australia",
+    description:
+      "A Sydney performance house with a dramatic, sail-like public presence.",
   },
   {
     name: "Habitat 67",
-    description: "Montreal, Canada",
+    description:
+      "A Montreal housing experiment where stacked homes imagine new urban living.",
   },
   {
     name: "Centre Pompidou",
-    description: "Paris, France",
+    description:
+      "A Paris cultural center that wears its systems on the outside.",
   },
   {
     name: "Vanna Venturi House",
-    description: "Philadelphia, United States",
+    description:
+      "A Philadelphia house that playfully questions what a house should be.",
   },
   {
     name: "Guggenheim Museum Bilbao",
-    description: "Bilbao, Spain",
+    description:
+      "A Bilbao museum where art, metal, and city transformation meet.",
   },
   {
     name: "Sagrada Família",
-    description: "Barcelona, Spain",
+    description:
+      "A Barcelona basilica where construction itself becomes part of time.",
   },
   {
     name: "Great Wall of China",
-    description: "Northern China",
+    description:
+      "A northern Chinese line of defense, trade, distance, and endurance.",
   },
   {
     name: "Beijing National Stadium",
-    description: "Beijing, China",
+    description:
+      "A Beijing stadium where gathering and spectacle take a nest-like form.",
   },
   {
     name: "Burj Khalifa",
-    description: "Dubai, United Arab Emirates",
+    description:
+      "A Dubai tower where height, commerce, living, and spectacle converge.",
   },
   {
     name: "The Shard",
-    description: "London, United Kingdom",
-    description: "Mixed used glass skyscraper",
+    description:
+      "A London glass tower slicing work, living, and skyline together.",
   },
   {
     name: "Bosco Verticale",
-    description: "Milan, Italy",
+    description:
+      "A Milan residential tower that wears trees like architecture.",
   },
   {
     name: "National Museum of African American History and Culture",
-    description: "Washington, D.C., United States",
+    description:
+      "A Washington museum carrying culture, memory, learning, and public recognition.",
   },
   {
     name: "Louvre Abu Dhabi",
-    description: "Abu Dhabi, United Arab Emirates",
+    description:
+      "An Abu Dhabi museum where global culture gathers beneath filtered light.",
   },
   {
     name: "Zeitz Museum of Contemporary Art Africa",
-    description: "Cape Town, South Africa",
+    description:
+      "A Cape Town museum turning industrial history into contemporary art space.",
   },
   {
     name: "The Shed",
-    description: "New York City, United States",
-    description: "Cultural Center for the Arts",
+    description: "A New York arts building that moves, adapts, and performs.",
   },
   {
     name: "Sara Kulturhus",
-    description: "Skellefteå, Sweden",
+    description:
+      "A Skellefteå cultural house where timber, learning, gathering, and living meet.",
   },
   {
     name: "Museum of the Future",
-    description: "Dubai, United Arab Emirates",
+    description: "A Dubai museum built for ideas that have not arrived yet.",
   },
   {
     name: "Living Landscape",
-    description: "Reykjavík, Iceland",
-    description: "Proposed zero carbon, mixed used timber building",
+    description:
+      "A Reykjavík building imagining work, living, timber, and landscape together.",
   },
   {
     name: "World of Volvo",
-    description: "Gothenburg, Sweden",
-    description: "Cultural Center of Volvo",
+    description:
+      "A Gothenburg brand space where mobility, culture, and gathering meet.",
   },
   {
     name: "Timber House",
-    description: "Toronto, Canada",
+    description:
+      "A Toronto timber development imagining warmer, lighter ways to live.",
   },
   {
     name: "Naples Underground Central Station",
-    description: "Naples, Italy",
+    description:
+      "A Naples transit station where movement, infrastructure, and completion continue.",
   },
   {
     name: "Lucas Museum of Narrative Art",
-    description: "Los Angeles, United States",
+    description:
+      "A Los Angeles museum where storytelling becomes the center of art.",
   },
   {
     name: "Centre des Cultures et Spiritualités Ewés",
-    description: "Notsé, Togo",
+    description:
+      "A Notsé cultural-spiritual center for worship, learning, and gathering.",
   },
 ];
 
@@ -612,13 +710,13 @@ export const properPlaceNames = [
   "Hagia Sophia",
   "Hephaestus",
   "Himeji",
-  "Hōryū-ji",
+  "Hōryūji",
   "Hoysaleswara",
   "Humayun",
   "Jokhang",
   "Karnak",
   "Khalifa",
-  "Kinkaku-ji",
+  "Kinkakuji",
   "Knossos",
   "Konark",
   "Lalibela",
@@ -650,7 +748,8 @@ export const properPlaceNames = [
   "Sydney",
   "Sagrada",
   "Família",
-  "Sainte-Geneviève",
+  "Sainte",
+  "Geneviève",
   "Süleymaniye",
   "Sultan",
   "Taj Mahal",
