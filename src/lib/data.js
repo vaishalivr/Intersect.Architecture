@@ -139,8 +139,7 @@ export const buildings = [
   },
   {
     name: "Aachen Cathedral",
-    description:
-      "A German cathedral where worship and royal memory share one space.",
+    description: "A German cathedral of royal memory and worship.",
   },
   {
     name: "Jokhang Temple",
@@ -357,8 +356,7 @@ export const buildings = [
   },
   {
     name: "Chhatrapati Shivaji Maharaj Terminus",
-    description:
-      "A Mumbai station where travel, work, and heritage constantly move.",
+    description: "A Mumbai station where travel and heritage meet.",
   },
   {
     name: "Eiffel Tower",
@@ -422,7 +420,7 @@ export const buildings = [
   },
   {
     name: "Schröder House",
-    description: "A Utrecht house where walls, color, and space learn to move.",
+    description: "A Utrecht house where walls, color, and spaces move.",
   },
   {
     name: "Villa Savoye",
@@ -441,8 +439,7 @@ export const buildings = [
   },
   {
     name: "Empire State Building",
-    description:
-      "A New York skyscraper that turns height into civic imagination.",
+    description: "A 102 storey steel framed New York skyscraper.",
   },
   {
     name: "Falling Water",
@@ -692,7 +689,8 @@ export const properPlaceNames = [
   "Chambord",
   "Chartres",
   "China",
-  "Chhatrapati Shivaji Maharaj",
+  "Chhatrapati",
+  "Shivaji Maharaj",
   "Chrysler",
   "Diocletian",
   "Durham",
@@ -756,7 +754,8 @@ export const properPlaceNames = [
   "Tikal",
   "Ur",
   "Umayyad",
-  "United States",
+  "United",
+  "States",
   "Vanna Venturi",
   "Venturi",
   "Versailles",
