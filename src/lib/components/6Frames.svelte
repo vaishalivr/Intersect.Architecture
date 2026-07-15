@@ -14,6 +14,17 @@
 
   let gridCells = [];
 
+  const refreshAllCursorSvg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="24" viewBox="0 0 100 24">
+      <rect x="0.5" y="4.5" width="91" height="18" rx="3" ry="3" fill="none" stroke="black" stroke-width="1.5"/>
+      <text x="6" y="18" font-size="12" font-family="Sora, sans-serif" fill="black">REFRESH ALL</text>
+    </svg>
+  `;
+
+  const refreshAllCursor = `url("data:image/svg+xml,${encodeURIComponent(
+    refreshAllCursorSvg,
+  )}") 0 0`;
+
   function createCellData() {
     const cellBuildings = getRandomItems(buildings, 3);
     const foundQualityWords = getFoundQualityWords(cellBuildings);
@@ -58,6 +69,7 @@
   tabindex="0"
   aria-label="Refresh all frames"
   style:--main-width={sixFramesTotalWidth}
+  style:--refresh-all-cursor={refreshAllCursor}
   on:click={refreshAllCells}
   on:keydown={(event) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -82,9 +94,6 @@
     gap: 2rem;
     padding: 2rem;
     border: 0.01px solid black;
-    cursor:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="36" viewBox="0 0 120 36"><circle cx="18" cy="18" r="15" fill="none" stroke="black" stroke-width="1.5"/><g transform="translate(40 18)"><text text-anchor="end" font-size="10" fill="black"><tspan x="0" dy="0">REFRESH</tspan><tspan x="0" dy="10">ALL</tspan></text></g></svg>')
-        16 16,
-      auto;
+    cursor: var(--refresh-all-cursor), auto;
   }
 </style>
