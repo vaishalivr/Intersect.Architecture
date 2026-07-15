@@ -1,12 +1,24 @@
 <script>
   export let cell = {};
   export let onRefresh = () => {};
+
+  const refreshFrameCursorSvg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="24" viewBox="0 0 120 24">
+      <rect x="0.5" y="4.5" width="115" height="18" rx="3" ry="3" fill="none" stroke="black" stroke-width="1.5"/>
+      <text x="6" y="18" font-size="12" font-family="Sora, sans-serif" fill="black">REFRESH FRAME</text>
+    </svg>
+  `;
+
+  const refreshFrameCursor = `url("data:image/svg+xml,${encodeURIComponent(
+    refreshFrameCursorSvg,
+  )}") 60 12`;
 </script>
 
 <div
   class="grid-cell"
   role="button"
   tabindex="0"
+  style:--refresh-frame-cursor={refreshFrameCursor}
   on:click|stopPropagation={() => onRefresh()}
   on:keydown|stopPropagation={(event) => {
     if (event.key === "Enter" || event.key === " ") {
@@ -46,13 +58,13 @@
     height: 390px;
     overflow: hidden;
     box-sizing: border-box;
+    position: relative;
+    background-image: radial-gradient(circle, #d3d3d3 1px, transparent 1px);
+    background-size: 3% 3%;
   }
 
   .grid-cell:hover {
-    cursor:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="36" viewBox="0 0 120 36"><circle cx="18" cy="18" r="15" fill="none" stroke="black" stroke-width="1.5"/><g transform="translate(40 18)"><text text-anchor="end" font-size="10" fill="black"><tspan x="0" dy="0">REFRESH</tspan><tspan x="0" dy="10">FRAME</tspan></text></g></svg>')
-        16 16,
-      auto;
+    cursor: var(--refresh-frame-cursor), auto;
   }
 
   .cell-generated-name {
@@ -71,7 +83,6 @@
   }
 
   .building-item {
-    border: 1px solid rgba(0, 0, 0, 0.12);
     display: flex;
     flex-direction: column;
   }
@@ -88,5 +99,4 @@
     opacity: 1;
     transform: translateX(0);
   }
-
 </style>

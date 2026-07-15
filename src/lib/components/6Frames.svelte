@@ -63,28 +63,49 @@
   });
 </script>
 
-<div
-  class="main-rect"
-  role="button"
-  tabindex="0"
-  aria-label="Refresh all frames"
-  style:--main-width={sixFramesTotalWidth}
-  style:--refresh-all-cursor={refreshAllCursor}
-  on:click={refreshAllCells}
-  on:keydown={(event) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      refreshAllCells();
-    }
-  }}
->
-  {#each gridCells as cell, index}
-    <GridCell {cell} onRefresh={() => refreshCell(index)} />
-  {/each}
+<div class="refresh-all-stage" style:--refresh-all-cursor={refreshAllCursor}>
+  <button
+    class="refresh-all-hotspot"
+    type="button"
+    aria-label="Refresh all frames"
+    on:click={refreshAllCells}
+  ></button>
+
+  <div class="main-rect" style:--main-width={sixFramesTotalWidth}>
+    {#each gridCells as cell, index}
+      <GridCell {cell} onRefresh={() => refreshCell(index)} />
+    {/each}
+  </div>
 </div>
 
 <style>
+  .refresh-all-stage {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .refresh-all-hotspot {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    cursor: var(--refresh-all-cursor), auto;
+  }
+
+  .refresh-all-hotspot:focus-visible {
+    outline: 2px solid black;
+    outline-offset: -8px;
+  }
+
   .main-rect {
+    position: relative;
+    z-index: 1;
     width: var(--main-width);
     min-height: clamp(200px, 75vh, 750px);
     height: auto;
@@ -94,6 +115,6 @@
     gap: 2rem;
     padding: 2rem;
     border: 0.01px solid black;
-    cursor: var(--refresh-all-cursor), auto;
+    cursor: auto;
   }
 </style>
